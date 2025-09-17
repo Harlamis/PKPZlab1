@@ -51,7 +51,10 @@ namespace PKPZlab1
         public static void Chessplay(int[] white_king, int[] black_horse, int[] black_bishop)
         {
             Console.WriteLine("If white king moves first: \n");
-            if (Math.Abs(black_horse[0] -  white_king[0]) == 1 || Math.Abs(black_horse[1] - white_king[1]) == 1) {
+            if (Math.Abs(black_horse[0] - white_king[0]) <= 1 &&
+            Math.Abs(black_horse[1] - white_king[1]) <= 1 &&
+            !(black_horse[0] == white_king[0] && black_horse[1] == white_king[1]))
+            {
                 //King kills black horse//
                 white_king = black_horse;
                 // diagonal: |x1 - x2| == |y1 - y2|
@@ -64,7 +67,8 @@ namespace PKPZlab1
                     Console.WriteLine("Attack! white king kills black horse!");
                 }
             }
-            if ((Math.Abs(black_horse[0] - white_king[0]) == 1 || Math.Abs(black_horse[1] - white_king[1]) == 1))
+            
+            if ((Math.Abs(black_bishop[0] - white_king[0]) == 1 || Math.Abs(black_bishop[1] - white_king[1]) == 1))
             {
                 // king kills bishop//
                 int[] newCor = white_king;
@@ -73,10 +77,11 @@ namespace PKPZlab1
                 {
                     Console.WriteLine("Attack! white king kills black bishop and black horse kills the king!");
                 }
-                else 
-                { 
-                    Console.WriteLine("Nothing happens, just regular move");
+                else
+                {
+                    Console.WriteLine(" Attack! White king kills black bishop!");
                 }
+            } else {                 Console.WriteLine("Nothing happens, regular move.");
             }
             Console.WriteLine("If black horse moves first \n");
             if (HorseReach(white_king, black_horse))
